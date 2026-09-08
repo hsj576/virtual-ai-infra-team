@@ -1,0 +1,52 @@
+schema_version: 1
+id: qwen38-dflash2-v1
+kind: acceleration_plugin
+status: active
+description: Pinned DFlash2 drafter for Qwen3.8-27B on Apple Silicon.
+
+source:
+  provider: huggingface
+  repo_id: z-lab/Qwen3.8-27B-DFlash2
+  revision: 50307d4c4cde6860d4eee73e2547cd786fe8e8a4
+
+compatibility:
+  target_model: mlx-community/Qwen3.8-27B-4bit
+  target_revision: 3e6447f082e89cc7f0bc6e5441afd38dfce760ff
+  runtime: mlx-vlm
+  runtime_min_version: 0.6.16
+  platform: apple-silicon
+
+artifacts:
+  allow_remote_code: false
+  estimated_download_gb: 3.85
+
+resources:
+  max_peak_memory_gb: 28
+
+launch:
+  template: mlx_vlm_dflash2
+  parameters:
+    draft_kind: dflash
+    variants:
+      - id: dflash2_default
+        description: DFlash2 with its native block size (8 for this revision).
+        draft_block_size: null
+      - id: dflash2_block4
+        description: DFlash2 with a shorter 4-token draft block.
+        draft_block_size: 4
+      - id: dflash2_block6
+        description: DFlash2 with a 6-token draft block.
+        draft_block_size: 6
+
+verification:
+  quality_suite: qwen38-smoke-v1
+  benchmark_suite: qwen38-speed-v1
+
+promotion:
+  minimum_speedup_percent: 10
+  max_error_rate: 0
+  require_all_quality_gates: true
+
+license:
+  name: Apache-2.0
+  review_status: approved

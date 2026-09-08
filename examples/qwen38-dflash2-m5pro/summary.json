@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "evidence_type": "historical_real_run",
+  "evolution_id": "20260831-212200-2b79db",
+  "run_id": "20260831-212201",
+  "status": "COMPLETED",
+  "selected_id": "dflash2_default",
+  "baseline_tps": 18.14,
+  "selected_tps": 37.52,
+  "speedup_percent": 106.84,
+  "quality": "4/4",
+  "stable_api": "http://127.0.0.1:8000/v1",
+  "stable_api_unchanged": true,
+  "previous_recipe_retained": true,
+  "elapsed_seconds": 299.0,
+  "scope": "Apple M5 Pro, Qwen3.8-27B-4bit, mlx-vlm 0.6.16, qwen38-speed-v1",
+  "limitations": [
+    "Results apply only to this machine, runtime and prompt suite.",
+    "Peak memory increased from 16.449 GB to 21.725 GB.",
+    "This evidence does not claim production SLA or universal 2x speedup."
+  ]
+}

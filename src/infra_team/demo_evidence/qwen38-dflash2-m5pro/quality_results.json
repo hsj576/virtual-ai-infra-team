@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "quality_suite": "qwen38-smoke-v1",
+  "results": {
+    "baseline": {
+      "quality_pass": true,
+      "checks": [
+        {
+          "id": "arithmetic",
+          "passed": true,
+          "detail": "found 391"
+        },
+        {
+          "id": "json_schema",
+          "passed": true,
+          "detail": "valid JSON with required keys"
+        },
+        {
+          "id": "instruction_following",
+          "passed": true,
+          "detail": "exact single-word answer"
+        },
+        {
+          "id": "code_generation",
+          "passed": true,
+          "detail": "valid add function with two-argument addition"
+        }
+      ]
+    },
+    "dflash2_block6": {
+      "quality_pass": true,
+      "checks": [
+        {
+          "id": "arithmetic",
+          "passed": true,
+          "detail": "found 391"
+        },
+        {
+          "id": "json_schema",
+          "passed": true,
+          "detail": "valid JSON with required keys"
+        },
+        {
+          "id": "instruction_following",
+          "passed": true,
+          "detail": "exact single-word answer"
+        },
+        {
+          "id": "code_generation",
+          "passed": true,
+          "detail": "valid add function with two-argument addition"
+        }
+      ]
+    },
+    "dflash2_default": {
+      "quality_pass": true,
+      "checks": [
+        {
+          "id": "arithmetic",
+          "passed": true,
+          "detail": "found 391"
+        },
+        {
+          "id": "json_schema",
+          "passed": true,
+          "detail": "valid JSON with required keys"
+        },
+        {
+          "id": "instruction_following",
+          "passed": true,
+          "detail": "exact single-word answer"
+        },
+        {
+          "id": "code_generation",
+          "passed": true,
+          "detail": "valid add function with two-argument addition"
+        }
+      ]
+    }
+  }
+}

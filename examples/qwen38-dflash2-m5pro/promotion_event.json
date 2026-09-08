@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "status": "serving_selected",
+  "selected_candidate": "dflash2_default",
+  "stable_api": "http://127.0.0.1:8000/v1",
+  "stable_api_unchanged": true,
+  "target_revision": "3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+  "candidate_manifest_id": "qwen38-dflash2-v1",
+  "candidate_manifest_hash": "aec146dabe4ece35916d91bf8d67a6a7fb535ac7792740401caffd1ab8a9fe81",
+  "runtime_version": "0.6.16",
+  "online_quality": {
+    "quality_pass": true,
+    "passed": 4,
+    "total": 4,
+    "checks": [
+      {
+        "id": "arithmetic",
+        "passed": true,
+        "detail": "found 391"
+      },
+      {
+        "id": "json_schema",
+        "passed": true,
+        "detail": "valid JSON with required keys"
+      },
+      {
+        "id": "instruction_following",
+        "passed": true,
+        "detail": "exact single-word answer"
+      },
+      {
+        "id": "code_generation",
+        "passed": true,
+        "detail": "valid add function with two-argument addition"
+      }
+    ]
+  },
+  "previous_recipe_retained": true
+}

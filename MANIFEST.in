@@ -1,0 +1,17 @@
+include LICENSE
+include README.md
+include SECURITY.md
+include CONTRIBUTING.md
+include CODE_OF_CONDUCT.md
+include CHANGELOG.md
+include THIRD_PARTY.md
+include CITATION.cff
+include dashboard_productized.png
+include dashboard_productized_mobile.png
+recursive-include configs *.yaml
+recursive-include docs *.md
+recursive-include examples *.md *.json *.ndjson *.py
+recursive-include prompts *.txt
+recursive-include scenarios *.md
+recursive-include scripts *.sh *.py
+recursive-include tests *.py

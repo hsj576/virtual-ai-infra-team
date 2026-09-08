@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local AI Upgrade Console</title>
+<link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">AI</div>
+    <div><div class="brand-title">Local AI Upgrade</div><div class="brand-sub">Test locally. Upgrade safely.</div></div>
+  </div>
+  <div class="top-actions">
+    <div class="refresh-state"><span class="refresh-dot"></span><span id="refreshText">每 5 秒刷新</span></div>
+    <button class="button control-button start" id="startButton" type="button">启动模型</button>
+    <button class="button control-button stop" id="stopButton" type="button">停止模型</button>
+    <button class="button control-button optimize" id="optimizeButton" type="button">检查并升级</button>
+    <button class="button" id="refreshButton" type="button" aria-label="刷新数据">刷新</button>
+  </div>
+</header>
+<main>
+  <section class="product-head">
+    <div class="eyebrow">Local-first AI lifecycle</div>
+    <h1>安装一次，以后本地 AI 自己测试和升级</h1>
+    <p>发现新能力，在本机真实测试；质量、速度和资源都更好才升级，失败就继续使用旧版本。客户端与 API 不需要改变。</p>
+    <div class="hero-actions">
+      <button class="primary-cta" id="heroEvolve" type="button">检查并升级本地 AI</button>
+      <span class="local-badge">数据与证据保留在本机</span>
+    </div>
+    <div class="page-note" id="generatedAt">正在读取本地服务与演进证据</div>
+  </section>
+
+  <div id="errorBanner" class="error-banner"></div>
+
+  <section class="outcome-grid">
+    <article class="card outcome-card">
+      <div class="outcome-kicker">当前本地 AI</div>
+      <div class="outcome-value" id="productServiceState">正在检查</div>
+      <div class="outcome-detail" id="productServiceDetail">稳定 API 状态</div>
+    </article>
+    <article class="card outcome-card accent">
+      <div class="outcome-kicker">最近一次升级</div>
+      <div class="outcome-value" id="productUpgradeOutcome">—</div>
+      <div class="outcome-detail" id="productUpgradeDetail">等待真实演进证据</div>
+    </article>
+    <article class="card outcome-card">
+      <div class="outcome-kicker">下一次检查</div>
+      <div class="outcome-value" id="productWatchState">—</div>
+      <div class="outcome-detail" id="productWatchDetail">由本地 Watch 策略决定</div>
+    </article>
+  </section>
+
+  <section class="hero">
+    <article class="card service-card">
+      <div class="service-top">
+        <div class="status-lockup">
+          <div id="statusIcon" class="status-icon good"><span>✓</span></div>
+          <div><div class="status-label">Stable local API</div><div class="status-title" id="serviceTitle">正在检查服务</div><div class="status-detail" id="serviceDetail">—</div></div>
+        </div>
+        <div id="livePill" class="live-pill good"><span class="pulse"></span><span>LIVE</span></div>
+      </div>
+      <div class="api-box"><div class="api-content"><div class="api-label">OpenAI-compatible endpoint</div><div class="api-value mono" id="apiEndpoint">—</div></div><button class="copy" id="copyApi" type="button">复制</button></div>
+      <div class="proof-row"><span id="stableApiProof">等待演进证据</span><span id="recoveryProof">Previous Recipe：—</span></div>
+    </article>
+    <article class="card recipe-card">
+      <div><div class="card-kicker">Current recipe</div><div class="recipe-name" id="recipeName">—</div><div class="recipe-model" id="recipeModel">—</div></div>
+      <div class="recipe-meta"><div class="mini-stat highlight"><div class="mini-value" id="recipeSpeedup">—</div><div class="mini-label" id="recipeEvidenceLabel">相对基线</div></div><div class="mini-stat"><div class="mini-value" id="recipeQuality">—</div><div class="mini-label">在线质量门禁</div></div></div>
+    </article>
+  </section>
+
+  <section class="metrics">
+    <article class="card metric"><div class="metric-head"><div class="metric-label">当前解码速度</div><div class="metric-tag">Latest</div></div><div class="metric-value"><span id="liveTps">—</span><span class="metric-unit">tok/s</span></div><div class="metric-foot">来自最近一次 API 请求</div></article>
+    <article class="card metric"><div class="metric-head"><div class="metric-label">首 Token 延迟</div><div class="metric-tag">TTFT</div></div><div class="metric-value"><span id="liveTtft">—</span><span class="metric-unit">s</span></div><div class="metric-foot">端到端请求观测</div></article>
+    <article class="card metric"><div class="metric-head"><div class="metric-label">峰值统一内存</div><div class="metric-tag">Peak</div></div><div class="metric-value"><span id="liveMemory">—</span><span class="metric-unit">GB</span></div><div class="metric-foot">当前服务最近请求</div></article>
+    <article class="card metric"><div class="metric-head"><div class="metric-label">人工技术决策</div><div class="metric-tag">After start</div></div><div class="metric-value"><span id="humanDecisions">0</span></div><div class="metric-foot">演进启动后无需选择参数</div></article>
+  </section>
+
+  <section class="evolution-grid">
+    <article class="card section-card evolution-card">
+      <div class="section-head">
+        <div><div class="section-title" id="evolutionTitle">最近一次演进</div><div class="section-sub" id="evolutionSubtitle">读取不可变本地 Artifact</div></div>
+        <div class="badge replay" id="evolutionModeBadge">历史真实运行回放</div>
+      </div>
+      <div class="replay-notice" id="replayNotice">这里展示历史真实运行证据，不会修改当前服务，也不会把回放伪装成实时实验。</div>
+      <div class="timeline" id="timeline"><div class="empty">暂无演进事件</div></div>
+    </article>
+    <article class="card section-card evidence-card">
+      <div class="section-head"><div><div class="section-title">升级证据</div><div class="section-sub">用户结果优先，技术细节下沉</div></div><div class="badge green" id="transitionBadge">—</div></div>
+      <div class="evidence-grid">
+        <div class="evidence-item"><span>稳定 API</span><strong id="evidenceApi">—</strong></div>
+        <div class="evidence-item"><span>质量门禁</span><strong id="evidenceQuality">—</strong></div>
+        <div class="evidence-item"><span>旧配置保留</span><strong id="evidenceRecovery">—</strong></div>
+        <div class="evidence-item"><span>Memory 命中</span><strong id="evidenceMemory">—</strong></div>
+      </div>
+      <details class="technical-details">
+        <summary>查看技术详情</summary>
+        <div class="system-list" id="technicalDetails"><div class="empty">暂无技术详情</div></div>
+      </details>
+    </article>
+  </section>
+
+  <section class="layout">
+    <article class="card section-card"><div class="section-head"><div><div class="section-title">真实性能对比</div><div class="section-sub">相同 Serving 路径；Smoke 与正式结果明确区分</div></div><div class="badge blue" id="runBadge">最新有效运行</div></div><div class="bars" id="candidateBars"><div class="empty">暂无有效优化运行</div></div><div class="legend"><div class="legend-item"><span class="legend-dot base-dot"></span>基线</div><div class="legend-item"><span class="legend-dot candidate-dot"></span>候选</div><div class="legend-item"><span class="legend-dot selected-dot"></span>已晋级</div></div></article>
+    <article class="card section-card"><div class="section-head"><div><div class="section-title">独立质量门禁</div><div class="section-sub">模型不能自己宣布自己变好了</div></div><div class="badge green" id="qualityBadge">—</div></div><div class="gate-grid" id="qualityGates"><div class="empty">暂无质量结果</div></div><div class="gate-summary"><div><div class="gate-caption">晋级后再次验证</div><div id="postRestartText">—</div></div><div class="gate-score" id="gateScore">—</div></div></article>
+  </section>
+
+  <section class="layout">
+    <article class="card section-card">
+      <div class="section-head"><div><div class="section-title">Watch 与本地记忆</div><div class="section-sub">下一次检查、去重和经验复用</div></div><div class="badge blue" id="watchBadge">—</div></div>
+      <div class="system-list" id="watchSummary"></div>
+      <div class="memory-strip"><div><strong id="memoryExperiments">0</strong><span>候选记录</span></div><div><strong id="memoryPromotions">0</strong><span>成功晋级</span></div><div><strong id="memoryEvolutions">0</strong><span>演进运行</span></div></div>
+    </article>
+    <article class="card section-card"><div class="section-head"><div><div class="section-title">运行环境</div><div class="section-sub">结果只对当前环境与测试集成立</div></div></div><div class="system-list" id="systemList"></div><div class="planner-box"><div class="planner-label">Primary planner</div><div class="planner-value" id="plannerSource">—</div><div class="planner-hypothesis" id="plannerHypothesis">—</div></div></article>
+  </section>
+
+  <section class="bottom-grid">
+    <article class="card table-card"><div class="table-head"><div><div class="section-title">真实演进记录</div><div class="section-sub">点击回放不可变 Artifact；不会修改当前服务</div></div></div><div class="evolution-list" id="evolutionList"><div class="empty">暂无演进记录</div></div></article>
+    <article class="card section-card"><div class="section-head"><div><div class="section-title">安全边界</div><div class="section-sub">自动化不等于任意执行</div></div><div class="badge blue">Policy bounded</div></div><div class="system-list"><div class="system-row"><div class="system-key">候选来源</div><div class="system-value">可信 Manifest + 固定 revision</div></div><div class="system-row"><div class="system-key">质量要求</div><div class="system-value">严格 4/4 + 零错误</div></div><div class="system-row"><div class="system-key">进程控制</div><div class="system-value">签名通道 + workspace 锁</div></div><div class="system-row"><div class="system-key">升级失败</div><div class="system-value">恢复 Previous Recipe</div></div><div class="system-row"><div class="system-key">数据边界</div><div class="system-value">Memory 与证据保留在本机</div></div></div></article>
+  </section>
+
+  <section class="chat-layout">
+    <article class="card chat-card">
+      <div class="chat-head"><div><div class="section-title">与当前本地 AI 对话</div><div class="section-sub" id="chatSubtitle">实时调用同一个稳定 API</div></div><div class="mode-tabs"><button class="mode-tab active" data-mode="deployed" type="button">部署模型</button><button class="mode-tab" data-mode="planner" type="button">升级顾问</button></div></div>
+      <div class="messages" id="messages"><div class="message"><div class="avatar">AI</div><div class="bubble">这里实时调用当前已晋级服务。历史演进回放与实时请求会明确区分。</div></div></div>
+      <div class="quick-prompts" id="quickPrompts"><button class="quick" type="button">介绍一下当前服务</button><button class="quick" type="button">解释投机解码</button><button class="quick" type="button">写一个 Python 快速排序</button></div>
+      <form class="composer" id="chatForm"><textarea id="chatInput" maxlength="8000" placeholder="输入消息；Shift+Enter 换行" aria-label="对话输入"></textarea><button class="send" id="sendButton" type="submit">发送</button></form>
+    </article>
+    <article class="card operation-card">
+      <div class="section-head"><div><div class="section-title">本地 AI 控制</div><div class="section-sub">所有写操作都需要二次确认</div></div><div class="badge blue">Whitelisted</div></div>
+      <div class="operation-buttons"><button class="op-button safe" id="panelStart" type="button">启动模型</button><button class="op-button danger" id="panelStop" type="button">停止模型</button><button class="op-button primary" id="panelOptimize" type="button">检查并升级本地 AI</button></div>
+      <div class="task-box"><div class="task-head"><div class="task-title">后台演进任务</div><div class="task-status" id="taskStatus">空闲</div></div><div class="task-log" id="taskLog">暂无后台任务。完整实验需要数分钟，不会伪装成 60 秒实时完成。</div></div>
+      <div class="command-list"><div class="card-kicker">固定命令</div><div class="command-item"><code>/status</code><span>查看当前部署</span></div><div class="command-item"><code>/start</code><span>确认后启动</span></div><div class="command-item"><code>/stop</code><span>确认后停止</span></div><div class="command-item"><code>/evolve</code><span>确认后检查并升级</span></div><div class="command-item"><code>/help</code><span>查看命令帮助</span></div></div>
+    </article>
+  </section>
+</main>
+</div>
+<div class="toast" id="toast">已复制</div>
+<div class="modal-backdrop" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-title" id="modalTitle">确认操作</div><div class="modal-text" id="modalText">—</div><div class="modal-options" id="modalOptions" hidden><label for="repeatsSelect">每个 Benchmark Prompt 重复次数</label><select id="repeatsSelect"><option value="1">1 次 — 只验证闭环</option><option value="3" selected>3 次 — 正式复测</option><option value="5">5 次 — 更稳健，耗时更长</option></select></div><div class="modal-actions"><button class="modal-action" id="modalCancel" type="button">取消</button><button class="modal-action confirm" id="modalConfirm" type="button">确认执行</button></div></div></div>
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+# Optimization task: local Qwen3.8-27B on Apple Silicon.
+#
+# This file describes the goal and the limits. It deliberately does not
+# describe *how* to optimize -- that is what the run is for.
+
+goal: accelerate local Qwen3.8-27B inference
+
+target:
+  model: mlx-community/Qwen3.8-27B-4bit
+  revision: 3e6447f082e89cc7f0bc6e5441afd38dfce760ff
+  engine: mlx-vlm
+  quantization: 4-bit
+
+candidate_registry:
+  name: builtin
+  manifest: qwen38-dflash2-v1
+  autonomy_policy: builtin
+  # Candidate repo, pinned revision, variants and resource estimates now live
+  # in the validated manifest rather than this task configuration.
+
+service:
+  name: qwen38-27b
+  host: 127.0.0.1
+  port: 8000
+  api: openai-compatible
+  switching: maintenance-window
+
+planner:
+  primary:
+    type: target_service
+    endpoint: http://127.0.0.1:8000/v1
+    model: current
+  failover:
+    # The currently published Qwen3.5 dense fallback is 4B, not 5B.
+    # It is loaded only when target planning fails and replanning is required.
+    - type: local_model
+      model: mlx-community/Qwen3.5-4B-MLX-4bit
+      load_policy: on_demand
+    - type: openai_compatible
+      base_url_env: INFRA_PLANNER_BASE_URL
+      model_env: INFRA_PLANNER_MODEL
+      api_key_env: INFRA_PLANNER_API_KEY
+    - type: rule_based
+  freeze_plan_before_model_switch: true
+  return_to_target_after_recovery: true
+
+constraints:
+  temperature: 0
+  quality_must_pass: true
+  max_memory_gb: 40
+  minimum_speedup_percent: 5
+  max_error_rate: 0
+
+benchmark:
+  repeats: 3
+  warmup: true
+  prompts:
+    - code_quicksort
+    - reasoning_math
+    - prose_explain
+
+# Planner candidates are populated from the exact validated Registry snapshot.
+# Unknown IDs are refused and launch behavior remains code-owned.
+allowed_candidates_from_registry: true
+
+safety:
+  allow_root: false
+  execute_model_generated_shell: false
+  mutate_system_state: false
+  artifacts_dir: .infra-team/runs

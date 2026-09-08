@@ -1,0 +1,21 @@
+{
+  "chip": "Apple M5 Pro",
+  "cpu_cores": {
+    "total": 18,
+    "perflevel0": 6,
+    "perflevel1": 12
+  },
+  "gpu_cores": 20,
+  "unified_memory_gb": 48.0,
+  "macos_version": "26.5.2",
+  "macos_build": "25F84",
+  "arch": "arm64",
+  "python_version": "3.13.12",
+  "packages": {
+    "mlx": "0.32.2",
+    "mlx-vlm": "0.6.16",
+    "mlx-lm": "0.31.3",
+    "transformers": "5.15.1",
+    "huggingface_hub": "1.28.0"
+  }
+}

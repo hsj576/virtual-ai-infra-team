@@ -1,0 +1,53 @@
+schema_version: 1
+enabled: true
+
+trusted_registries:
+  - builtin
+
+trusted_namespaces:
+  - z-lab
+  - mlx-community
+  - Qwen
+
+allowed_kinds:
+  - acceleration_plugin
+
+approved_launch_templates:
+  - mlx_vlm_dflash2
+
+max_download_gb_per_candidate: 20
+max_total_candidate_store_gb: 60
+max_experiment_minutes: 45
+max_peak_memory_gb: 40
+
+maintenance_window:
+  # Watch mode only enters a maintenance window during this local-time range.
+  # Explicit `evolve --once` remains an operator-approved immediate run.
+  enabled: true
+  timezone: Asia/Shanghai
+  start: "02:00"
+  end: "05:00"
+  weekdays: [0, 1, 2, 3, 4, 5, 6]
+
+watch:
+  poll_interval_seconds: 300
+  backoff_base_seconds: 60
+  backoff_cap_seconds: 3600
+  no_improvement_recheck_seconds: 86400
+
+notifications:
+  enabled: true
+  macos_notification_center: true
+
+auto_prepare: true
+auto_experiment: true
+auto_promote:
+  acceleration_plugin: true
+  quantization_variant: false
+  runtime_upgrade: false
+  target_model: false
+
+minimum_speedup_percent: 10
+require_all_quality_gates: true
+require_zero_errors: true
+allow_remote_code: false

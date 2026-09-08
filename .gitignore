@@ -1,0 +1,30 @@
+.venv/
+.infra-team/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.DS_Store
+.coverage
+htmlcov/
+
+# Model assets and common local caches
+*.safetensors
+*.gguf
+*.ckpt
+*.pth
+*.pt
+.cache/
+models/
+
+# Local secrets and overrides
+.env
+.env.*
+!.env.example
+*.local.yaml
+*.local.yml
+
+# Generated service definitions may contain absolute local paths
+*.generated.plist

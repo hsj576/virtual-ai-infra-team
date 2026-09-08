@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: Virtual AI Infra Team
+message: If you use this software or its public evidence bundle, please cite this repository.
+type: software
+authors:
+  - family-names: Hu
+    given-names: Shijing
+repository-code: https://github.com/hsj576/virtual-ai-infra-team
+license: Apache-2.0
+version: 0.1.0

@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "infra-team"
+version = "0.1.0"
+description = "An open-source virtual AI Infra team for testing and safely upgrading local AI services."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+    {name = "Shijing Hu"},
+]
+keywords = [
+    "local-ai",
+    "llm-inference",
+    "ai-infrastructure",
+    "apple-silicon",
+    "mlx",
+    "speculative-decoding",
+    "model-serving",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: MacOS X",
+    "Operating System :: MacOS :: MacOS X",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+# Runtime versions are pinned because benchmark evidence is not comparable when
+# the inference stack changes underneath it.
+dependencies = [
+    "mlx==0.32.2",
+    "mlx-vlm==0.6.16",
+    "mlx-lm==0.31.3",
+    "huggingface_hub>=1.28.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2",
+    "pytest>=8.0",
+    "twine>=6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/hsj576/virtual-ai-infra-team"
+Repository = "https://github.com/hsj576/virtual-ai-infra-team"
+Issues = "https://github.com/hsj576/virtual-ai-infra-team/issues"
+
+[project.scripts]
+infra-team = "infra_team.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+infra_team = [
+    "defaults/*.yaml",
+    "demo_evidence/**/*.json",
+    "demo_evidence/**/*.ndjson",
+    "static/*.html",
+    "static/*.css",
+    "static/*.js",
+    "registry/*.yaml",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

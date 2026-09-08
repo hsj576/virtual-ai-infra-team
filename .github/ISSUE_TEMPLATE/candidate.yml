@@ -1,0 +1,44 @@
+name: Candidate or runtime proposal
+description: Propose a fixed-revision optimization candidate, validator, or runtime adapter.
+title: "[Candidate] "
+labels: [candidate]
+body:
+  - type: input
+    id: repository
+    attributes:
+      label: Upstream repository
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Immutable commit revision
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Target, runtime, platform, and resource requirements
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Existing quality and performance evidence
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Safety constraints
+      options:
+        - label: The candidate can run without remote code.
+          required: true
+        - label: The manifest will not contain shell commands.
+          required: true
+        - label: Local validation remains required before promotion.
+          required: true

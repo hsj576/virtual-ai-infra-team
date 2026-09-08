@@ -1,0 +1,17 @@
+{"message": "One-shot evolution requested", "state": "TRIGGERED", "time": "2026-08-31T21:22:00+0800"}
+{"message": "Reading trusted local candidate registry", "state": "DISCOVERING", "time": "2026-08-31T21:22:00+0800"}
+{"message": "Checking trust, compatibility and resource policy", "state": "PREFLIGHTING", "time": "2026-08-31T21:22:00+0800"}
+{"message": "Preparing pinned candidate while baseline remains online", "state": "PREPARING", "time": "2026-08-31T21:22:00+0800"}
+{"progress": 1.0, "message": "Candidate preparation complete", "state": "PREPARING", "manifest_id": "qwen38-dflash2-v1", "time": "2026-08-31T21:22:01+0800", "candidate_id": "dflash2_default", "reused": true}
+{"message": "Candidates are verified and ready; local memory prior loaded", "state": "READY", "time": "2026-08-31T21:22:01+0800"}
+{"message": "Target is generating an ExperimentPlan", "state": "PLANNING", "time": "2026-08-31T21:24:02+0800", "supervisor_event": "plan_start"}
+{"message": "ExperimentPlan frozen before maintenance", "state": "PLAN_FROZEN", "time": "2026-08-31T21:24:25+0800", "supervisor_event": "plan_done"}
+{"message": "Entering controlled maintenance window", "state": "MAINTENANCE", "time": "2026-08-31T21:24:25+0800", "supervisor_event": "service_switch_start"}
+{"message": "Running candidate experiment", "state": "EXPERIMENTING", "time": "2026-08-31T21:24:26+0800", "supervisor_event": "candidate_start"}
+{"message": "Running candidate experiment", "state": "EXPERIMENTING", "time": "2026-08-31T21:25:40+0800", "supervisor_event": "candidate_start"}
+{"message": "Independent selector produced a verdict", "state": "SELECTING", "time": "2026-08-31T21:26:51+0800", "supervisor_event": "verdict"}
+{"message": "Starting selected recipe at stable API", "state": "PROMOTING", "time": "2026-08-31T21:26:51+0800", "supervisor_event": "promotion_start"}
+{"message": "Running post-restart online quality gate", "state": "ONLINE_VERIFYING", "time": "2026-08-31T21:26:58+0800", "supervisor_event": "online_verify_start"}
+{"message": "Selected recipe is serving and online verification passed", "state": "ONLINE_VERIFYING", "time": "2026-08-31T21:27:00+0800"}
+{"message": "Writing success and failure evidence to Recipe Memory", "state": "REMEMBERING", "time": "2026-08-31T21:27:00+0800"}
+{"message": "Evolution completed and experience saved", "state": "COMPLETED", "time": "2026-08-31T21:27:00+0800"}
